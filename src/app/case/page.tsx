@@ -3,16 +3,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { AnimatedSection } from "@/components/ui";
 import { sanityFetch, queries } from "@/lib/sanity";
+import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = { title: "Case", description: "Se hur Blomsnes Development har hjälpt företag växa genom strategisk affärsutveckling och coaching." };
-
-/* ── Hardcoded fallback data (used when Sanity is not configured) ── */
-
-const fallbackCases = [
-  { number: "01", category: "Strategisk Affärsutveckling", title: "Tillväxtstrategi för tjänsteföretag i förändring", challenge: "Ett medelstort tjänsteföretag stod inför stagnerande tillväxt och ökande konkurrens. Den befintliga affärsmodellen hade nått sin gräns.", approach: "Genom djupgående marknads- och konkurrensanalys identifierade vi nya tillväxtmöjligheter och utformade en differentierad positioneringsstrategi.", results: ["Ny strategisk riktning förankrad i hela organisationen", "Tre nya tillväxtområden med hög potential identifierade", "Ökad omsättning inom 12 månader", "Stärkt varumärkesposition"] },
-  { number: "02", category: "Digital Transformation", title: "Digital mognad i traditionell bransch", challenge: "En organisation behövde modernisera processer och kundupplevelser för att möta förändrade krav och ny konkurrens från digitala aktörer.", approach: "Vi genomförde en digital mognadsbedömning och skapade en transformationsroadmap med fokus på kundresan och interna processer.", results: ["Digital transformationsplan med tydlig prioritering", "Digitaliserad kundresa med ökad kundnöjdhet", "Effektiviserade processer som frigjorde resurser", "Ny digital kompetens i organisationen"] },
-  { number: "03", category: "Coaching & Ledarskap", title: "Ledarskapscoaching för ny VD", challenge: "En nytillträdd VD behövde snabbt etablera sig, bygga förtroende och navigera flera parallella förändringsinitiativ.", approach: "Genom individuell coaching arbetade vi med ledarskapsvisionen, förändringsledning och kommunikation med nyckelintressenter.", results: ["Tydlig ledarskapsvision förankrad i organisationen", "Framgångsrik omorganisation genomförd", "Ökad tillit från styrelse och ledningsgrupp", "Personlig tillväxt och ökat ledarskapsmod"] },
-];
 
 /* ── Sanity case type ── */
 
@@ -40,6 +33,16 @@ function normalizeCase(c: SanityCase, index: number) {
 }
 
 export default async function CasePage() {
+  const t = await getTranslations('cases');
+
+  /* ── Hardcoded fallback data (used when Sanity is not configured) ── */
+
+  const fallbackCases = [
+    { number: "01", category: t('c1Category'), title: t('c1Title'), challenge: t('c1Challenge'), approach: t('c1Approach'), results: [t('c1r1'), t('c1r2'), t('c1r3'), t('c1r4')] },
+    { number: "02", category: t('c2Category'), title: t('c2Title'), challenge: t('c2Challenge'), approach: t('c2Approach'), results: [t('c2r1'), t('c2r2'), t('c2r3'), t('c2r4')] },
+    { number: "03", category: t('c3Category'), title: t('c3Title'), challenge: t('c3Challenge'), approach: t('c3Approach'), results: [t('c3r1'), t('c3r2'), t('c3r3'), t('c3r4')] },
+  ];
+
   let cases = fallbackCases;
 
   /* Try Sanity — gracefully fall back to hardcoded data */
@@ -62,9 +65,9 @@ export default async function CasePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-3 mb-6"><div className="h-px w-12 bg-white/20" /><span className="font-body text-[11px] font-semibold tracking-[0.3em] uppercase text-white/40">Case</span></div>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.08] tracking-tight">Resultat som talar<br />för sig själva</h1>
-              <p className="mt-8 font-body text-lg text-white/50 max-w-2xl leading-relaxed">Varje uppdrag är unikt, men målet är alltid detsamma — verkliga, mätbara resultat som gör skillnad.</p>
+              <div className="flex items-center gap-3 mb-6"><div className="h-px w-12 bg-white/20" /><span className="font-body text-[11px] font-semibold tracking-[0.3em] uppercase text-white/40">{t('label')}</span></div>
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.08] tracking-tight">{t('title1')}<br />{t('title2')}</h1>
+              <p className="mt-8 font-body text-lg text-white/50 max-w-2xl leading-relaxed">{t('desc')}</p>
             </div>
           </AnimatedSection>
         </div>
@@ -83,14 +86,14 @@ export default async function CasePage() {
                   </div>
                   <div className="lg:col-span-7 space-y-10">
                     {c.challenge && (
-                      <div><h3 className="font-body text-[11px] font-semibold tracking-[0.3em] uppercase text-[#0F172A]/40 mb-3">Utmaning</h3><p className="font-body text-[#4B5563] leading-relaxed">{c.challenge}</p></div>
+                      <div><h3 className="font-body text-[11px] font-semibold tracking-[0.3em] uppercase text-[#0F172A]/40 mb-3">{t('challenge')}</h3><p className="font-body text-[#4B5563] leading-relaxed">{c.challenge}</p></div>
                     )}
                     {c.approach && (
-                      <div><h3 className="font-body text-[11px] font-semibold tracking-[0.3em] uppercase text-[#0F172A]/40 mb-3">Angreppssätt</h3><p className="font-body text-[#4B5563] leading-relaxed">{c.approach}</p></div>
+                      <div><h3 className="font-body text-[11px] font-semibold tracking-[0.3em] uppercase text-[#0F172A]/40 mb-3">{t('approach')}</h3><p className="font-body text-[#4B5563] leading-relaxed">{c.approach}</p></div>
                     )}
                     {c.results.length > 0 && (
                       <div className="p-8 lg:p-10" style={{ backgroundColor: "#F5F0EB" }}>
-                        <h3 className="font-body text-[11px] font-semibold tracking-[0.3em] uppercase text-[#0F172A]/40 mb-6">Resultat</h3>
+                        <h3 className="font-body text-[11px] font-semibold tracking-[0.3em] uppercase text-[#0F172A]/40 mb-6">{t('results')}</h3>
                         <ul className="space-y-4">{c.results.map((r) => (<li key={r} className="flex items-start gap-4 font-body text-[#4B5563]"><div className="w-1.5 h-1.5 rounded-full bg-[#0F172A]/20 mt-2.5 flex-shrink-0" /><span>{r}</span></li>))}</ul>
                       </div>
                     )}
@@ -108,9 +111,9 @@ export default async function CasePage() {
             <div className="relative bg-[#0F172A] px-8 py-20 sm:px-16 sm:py-24 lg:px-24 lg:py-28 overflow-hidden">
               <div className="absolute top-0 right-0 w-1/2 h-full opacity-[0.03]" style={{ backgroundImage: "repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%)", backgroundSize: "24px 24px" }} />
               <div className="relative z-10 max-w-2xl">
-                <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-[1.08] tracking-tight">Vill ni skapa liknande resultat?</h2>
-                <p className="mt-8 font-body text-lg text-white/45 leading-relaxed max-w-xl">Varje framgångshistoria börjar med ett samtal.</p>
-                <Link href="/boka" className="inline-flex items-center justify-center mt-12 px-10 py-5 bg-white text-[#0F172A] font-body text-sm font-semibold tracking-wide rounded-none hover:bg-white/90 transition-all duration-300">Boka samtal <ArrowRight className="ml-3 w-4 h-4" /></Link>
+                <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-[1.08] tracking-tight">{t('ctaTitle')}</h2>
+                <p className="mt-8 font-body text-lg text-white/45 leading-relaxed max-w-xl">{t('ctaDesc')}</p>
+                <Link href="/boka" className="inline-flex items-center justify-center mt-12 px-10 py-5 bg-white text-[#0F172A] font-body text-sm font-semibold tracking-wide rounded-none hover:bg-white/90 transition-all duration-300">{t('ctaCta')} <ArrowRight className="ml-3 w-4 h-4" /></Link>
               </div>
             </div>
           </AnimatedSection>

@@ -1,31 +1,34 @@
 import type { Metadata } from "next";
 import { AnimatedSection } from "@/components/ui";
 import { SITE_CONFIG } from "@/lib/constants";
+import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = { title: "Integritetspolicy", description: `Integritetspolicy för ${SITE_CONFIG.name}.` };
 
-const sections = [
-  { title: "Personuppgiftsansvarig", content: `${SITE_CONFIG.name} med säte i ${SITE_CONFIG.location} är personuppgiftsansvarig för behandlingen av era personuppgifter i samband med användning av denna webbplats och våra tjänster.` },
-  { title: "Vilka uppgifter vi samlar in", content: "Vi samlar in personuppgifter som ni frivilligt lämnar till oss genom våra kontakt- och bokningsformulär. Dessa uppgifter kan inkludera namn, e-postadress, telefonnummer, företagsnamn samt meddelanden och övrig information ni lämnar i formulär." },
-  { title: "Hur vi använder era uppgifter", content: "Vi använder era personuppgifter för att besvara era förfrågningar, boka samtal med er, tillhandahålla våra tjänster och kommunicera med er avseende pågående eller planerade uppdrag. Vi delar aldrig era personuppgifter med tredje part utan ert samtycke, om det inte krävs enligt lag." },
-  { title: "Rättslig grund", content: "Behandlingen av era personuppgifter baseras på ert samtycke samt på vårt berättigade intresse att besvara förfrågningar och tillhandahålla tjänster ni efterfrågat." },
-  { title: "Lagring och säkerhet", content: "Vi lagrar era personuppgifter så länge det är nödvändigt för att uppfylla det syfte för vilket de samlades in. Vi vidtar lämpliga tekniska och organisatoriska åtgärder för att skydda era uppgifter mot obehörig åtkomst, förlust eller manipulation." },
-  { title: "Era rättigheter", content: "Enligt GDPR har ni rätt att begära tillgång till, rättelse av och radering av era personuppgifter. Ni har även rätt att invända mot behandlingen, begära begränsning av behandlingen och rätt till dataportabilitet. Ni kan när som helst återkalla ert samtycke." },
-  { title: "Cookies", content: "Denna webbplats kan använda cookies för att förbättra er upplevelse. Cookies är små textfiler som lagras på er enhet. Ni kan när som helst ändra era cookie-inställningar i er webbläsare." },
-  { title: "Ändringar i policyn", content: "Vi förbehåller oss rätten att uppdatera denna integritetspolicy. Vid väsentliga ändringar informerar vi på vår webbplats. Senast uppdaterad: januari 2025." },
-  { title: "Kontakt", content: `Har ni frågor om vår hantering av personuppgifter? Kontakta oss på ${SITE_CONFIG.email}. Ni har även rätt att lämna klagomål till Integritetsskyddsmyndigheten (IMY).` },
-];
+export default async function IntegritetspolicyPage() {
+  const t = await getTranslations('privacy');
 
-export default function IntegritetspolicyPage() {
+  const sections = [
+    { title: t('s1Title'), content: t('s1Content') },
+    { title: t('s2Title'), content: t('s2Content') },
+    { title: t('s3Title'), content: t('s3Content') },
+    { title: t('s4Title'), content: t('s4Content') },
+    { title: t('s5Title'), content: t('s5Content') },
+    { title: t('s6Title'), content: t('s6Content') },
+    { title: t('s7Title'), content: t('s7Content') },
+    { title: t('s8Title'), content: t('s8Content') },
+    { title: t('s9Title'), content: t('s9Content') },
+  ];
+
   return (
     <>
       <section className="py-28 lg:py-36 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-3 mb-6"><div className="h-px w-12 bg-[#0F172A]/15" /><span className="font-body text-[11px] font-semibold tracking-[0.3em] uppercase text-[#0F172A]/40">Juridiskt</span></div>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-[#0F172A] leading-[1.08] tracking-tight">Integritetspolicy</h1>
-              <p className="mt-8 font-body text-lg text-[#4B5563] max-w-2xl leading-relaxed">Er integritet är viktig för oss. Här beskriver vi hur {SITE_CONFIG.name} samlar in, använder och skyddar era personuppgifter.</p>
+              <div className="flex items-center gap-3 mb-6"><div className="h-px w-12 bg-[#0F172A]/15" /><span className="font-body text-[11px] font-semibold tracking-[0.3em] uppercase text-[#0F172A]/40">{t('label')}</span></div>
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-[#0F172A] leading-[1.08] tracking-tight">{t('title')}</h1>
+              <p className="mt-8 font-body text-lg text-[#4B5563] max-w-2xl leading-relaxed">{t('desc')}</p>
             </div>
           </AnimatedSection>
         </div>
