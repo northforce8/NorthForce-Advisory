@@ -25,8 +25,17 @@ export function JsonLd({ locale }: JsonLdProps) {
     telephone: SITE_CONFIG.phone,
     address: {
       "@type": "PostalAddress",
+      streetAddress: SITE_CONFIG.address,
+      postalCode: SITE_CONFIG.postalCode,
+      addressLocality: SITE_CONFIG.city,
       addressCountry: "SE",
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: "59.3414",
+      longitude: "18.0830",
+    },
+    priceRange: "$$$",
     foundingDate: "2024",
     areaServed: [
       { "@type": "Country", name: "Sweden" },
@@ -72,7 +81,13 @@ export function JsonLd({ locale }: JsonLdProps) {
         },
       ],
     },
-    sameAs: [],
+    sameAs: [
+      SITE_CONFIG.socials.linkedin,
+      SITE_CONFIG.socials.twitter,
+      SITE_CONFIG.socials.youtube,
+      SITE_CONFIG.socials.instagram,
+      SITE_CONFIG.socials.facebook,
+    ],
   };
 
   const website = {
@@ -83,6 +98,34 @@ export function JsonLd({ locale }: JsonLdProps) {
     name: orgName,
     publisher: { "@id": `${url}/#organization` },
     inLanguage: locale === "en" ? "en" : locale === "no" ? "nb" : "sv",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${url}/blogg?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  const localBusiness = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${url}/#localbusiness`,
+    name: orgName,
+    url,
+    telephone: SITE_CONFIG.phone,
+    email: SITE_CONFIG.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: SITE_CONFIG.address,
+      postalCode: SITE_CONFIG.postalCode,
+      addressLocality: SITE_CONFIG.city,
+      addressCountry: "SE",
+    },
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "08:00",
+      closes: "18:00",
+    },
   };
 
   return (
@@ -94,6 +137,10 @@ export function JsonLd({ locale }: JsonLdProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }}
       />
     </>
   );

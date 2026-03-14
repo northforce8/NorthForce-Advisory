@@ -40,8 +40,8 @@ export default async function HomePage() {
       {/* ═══ A. HERO ═══ */}
       <section className="relative -mt-20 h-[100svh] min-h-[720px] flex items-center overflow-hidden">
         <Image src="/hero.jpg" alt="Nordisk arkitektur — strategisk miljö" fill priority className="object-cover object-center" sizes="100vw" quality={90} />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A]/75 via-[#0F172A]/55 to-[#0F172A]/85" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A]/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A]/60 via-[#0F172A]/35 to-[#0F172A]/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A]/30 to-transparent" />
 
         <div className="relative z-10 w-full">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -75,11 +75,11 @@ export default async function HomePage() {
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white" />
       </section>
 
       {/* ═══ B. STRATEGIC POSITIONING ═══ */}
-      <section className="py-28 lg:py-36 bg-white">
+      <section className="py-28 lg:py-36 bg-white overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <AnimatedSection>
@@ -104,9 +104,14 @@ export default async function HomePage() {
               </div>
             </AnimatedSection>
             <AnimatedSection delay={200}>
-              <div className="relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden">
-                <Image src="/strategy.jpg" alt="Strategiskt ledarskap i nordisk miljö" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" quality={85} />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/10 to-transparent" />
+              <div className="relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden -mx-4 sm:-mx-6 lg:ml-0 lg:-mr-[max(2rem,calc((100vw-80rem)/2+2rem))]">
+                <Image src="/strategy.jpg" alt="Betongvägg — nordisk industriell estetik" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 60vw" quality={85} />
+                <div className="absolute inset-0 bg-[#0F172A]/20" />
+                <div className="absolute inset-0 flex items-center justify-center px-10 lg:px-14">
+                  <blockquote className="font-display text-2xl sm:text-3xl lg:text-[2rem] text-white font-bold leading-[1.2] tracking-tight text-center">
+                    &ldquo;{t('aboutQuote')}&rdquo;
+                  </blockquote>
+                </div>
               </div>
             </AnimatedSection>
           </div>
@@ -163,9 +168,14 @@ export default async function HomePage() {
                 </p>
               </AnimatedSection>
               <AnimatedSection delay={200}>
-                <div className="mt-12 relative aspect-[4/3] overflow-hidden">
-                  <Image src="/leadership.jpg" alt="Ledarskap och strategisk transformation" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" quality={85} />
-                  <div className="absolute inset-0 bg-[#0F172A]/15" />
+                <div className="mt-12 relative aspect-[4/3] overflow-hidden -mx-4 sm:-mx-6 lg:mr-0 lg:-ml-[max(2rem,calc((100vw-80rem)/2+2rem))]">
+                  <Image src="/leadership.jpg" alt="Vatten under molnig himmel — transformation" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 60vw" quality={85} />
+                  <div className="absolute inset-0 bg-[#0F172A]/30" />
+                  <div className="absolute inset-0 flex items-center justify-center px-10 lg:px-14">
+                    <blockquote className="font-display text-2xl sm:text-3xl lg:text-[2rem] text-white font-bold leading-[1.2] tracking-tight text-center">
+                      &ldquo;{t('methQuote')}&rdquo;
+                    </blockquote>
+                  </div>
                 </div>
               </AnimatedSection>
             </div>

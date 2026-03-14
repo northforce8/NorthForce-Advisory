@@ -45,7 +45,7 @@ export default async function OmPage() {
           ],
         }) }}
       />
-      <section className="py-28 lg:py-36 bg-white">
+      <section className="py-28 lg:py-36 bg-white overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <AnimatedSection>
@@ -68,9 +68,14 @@ export default async function OmPage() {
               </div>
             </AnimatedSection>
             <AnimatedSection delay={200}>
-              <div className="relative aspect-[3/4] overflow-hidden">
-                <Image src="/leadership.jpg" alt="NorthForce Advisory — Våra rådgivare" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" quality={85} />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/10 to-transparent" />
+              <div className="relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden -mx-4 sm:-mx-6 lg:ml-0 lg:-mr-[max(2rem,calc((100vw-80rem)/2+2rem))]">
+                <Image src="/advisors.jpg" alt="NorthForce Advisory — Våra rådgivare på expedition" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 60vw" quality={85} />
+                <div className="absolute inset-0 bg-[#0F172A]/25" />
+                <div className="absolute inset-0 flex items-center justify-center px-10 lg:px-14">
+                  <blockquote className="font-display text-2xl sm:text-3xl lg:text-[2rem] text-white font-bold leading-[1.2] tracking-tight text-center">
+                    &ldquo;{t('advisorsQuote')}&rdquo;
+                  </blockquote>
+                </div>
               </div>
             </AnimatedSection>
           </div>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { AnimatedSection } from "@/components/ui";
@@ -73,15 +74,33 @@ export default async function BloggPage() {
   return (
     <>
       <BreadcrumbSchema items={[{ name: t('label'), href: '/blogg' }]} />
-      <section className="py-28 lg:py-36 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection>
-            <div className="max-w-3xl">
-              <div className="flex items-center gap-3 mb-6"><div className="h-px w-12 bg-[#0F172A]/15" /><span className="font-body text-[11px] font-semibold tracking-[0.3em] uppercase text-[#0F172A]/40">{t('label')}</span></div>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-[#0F172A] leading-[1.08] tracking-tight">{t('title')}</h1>
-              <p className="mt-8 font-body text-lg text-[#4B5563] max-w-2xl leading-relaxed">{t('desc')}</p>
+      <section className="relative overflow-hidden">
+        <div className="relative aspect-[3/4] sm:aspect-[3/2] lg:aspect-[21/9]">
+          {/* Bild-wrapper: på desktop 15% bredare från vänsterkant → örnen skjuts åt höger */}
+          <div className="absolute inset-0 lg:origin-left lg:scale-x-[1.15]">
+            <Image src="/insights.jpg" alt="Örn över snötäckta berg — perspektiv och insikt" fill className="object-cover object-[50%_35%]" sizes="100vw" quality={85} priority />
+          </div>
+          {/* Desktop: vänstergradient för text */}
+          <div className="absolute inset-0 hidden lg:block bg-gradient-to-r from-white/70 via-white/30 to-transparent" />
+          {/* Mobil: topp+bott-gradient så örnen syns i mitten */}
+          <div className="absolute inset-0 lg:hidden bg-gradient-to-b from-white/80 via-transparent to-white/80" />
+          <div className="absolute inset-0 flex flex-col justify-between lg:justify-center py-10 sm:py-14 lg:py-0">
+            <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+              <AnimatedSection>
+                <div className="max-w-lg">
+                  <div className="flex items-center gap-3 mb-4 lg:mb-6"><div className="h-px w-12 bg-[#0F172A]/30" /><span className="font-body text-[11px] font-semibold tracking-[0.3em] uppercase text-[#0F172A]/50">{t('label')}</span></div>
+                  <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-[#0F172A] leading-[1.08] tracking-tight">{t('title')}</h1>
+                  <p className="mt-6 font-body text-lg text-[#4B5563] leading-relaxed hidden lg:block">{t('desc')}</p>
+                </div>
+              </AnimatedSection>
             </div>
-          </AnimatedSection>
+            {/* Mobil: beskrivning under örnen */}
+            <div className="lg:hidden mx-auto w-full max-w-7xl px-4 sm:px-6">
+              <AnimatedSection delay={200}>
+                <p className="font-body text-lg text-[#4B5563] leading-relaxed max-w-lg">{t('desc')}</p>
+              </AnimatedSection>
+            </div>
+          </div>
         </div>
       </section>
 

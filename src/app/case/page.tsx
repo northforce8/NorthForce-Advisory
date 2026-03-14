@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { AnimatedSection } from "@/components/ui";
@@ -66,8 +67,10 @@ export default async function CasePage() {
   return (
     <>
       <BreadcrumbSchema items={[{ name: t('label'), href: '/case' }]} />
-      <section className="py-28 lg:py-36 bg-[#0F172A] text-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative py-28 lg:py-36 text-white overflow-hidden">
+        <Image src="/cases.jpg" alt="Orkester i konsertsal — samspel och precision" fill className="object-cover object-[50%_40%]" sizes="100vw" quality={85} priority />
+        <div className="absolute inset-0 bg-[#0F172A]/70" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
             <div className="max-w-3xl">
               <div className="flex items-center gap-3 mb-6"><div className="h-px w-12 bg-white/20" /><span className="font-body text-[11px] font-semibold tracking-[0.3em] uppercase text-white/40">{t('label')}</span></div>
